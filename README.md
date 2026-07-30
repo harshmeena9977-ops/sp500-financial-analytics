@@ -13,7 +13,11 @@ An enterprise-grade financial analytics dashboard built with **Python**, **Strea
 ## 🎥 Demo & Walkthrough
 > *Watch the live application demo below showcasing real-time filters, executive KPIs, and interactive financial charts.*
 
-https://github.com/harshmeena9977-ops/sp500-financial-analytics/raw/main/assets/S%26P%20500%20demo.mp4
+<p align="center">
+  <video src="https://github.com/harshmeena9977-ops/sp500-financial-analytics/raw/main/assets/S%26P%20500%20demo.mp4" width="100%" controls autoplay muted loop>
+    Your browser does not support the video tag.
+  </video>
+</p>
 
 ---
 

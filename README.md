@@ -1,88 +1,73 @@
-# 💼 S&P 500 Executive Intelligence Hub & Command Center
+# S&P 500 Historical Data Dashboard
 
-An enterprise-grade financial analytics dashboard built with **Python**, **Streamlit**, and **Plotly** to monitor, analyze, and visualize multi-year S&P 500 stock market data (2014–2017).
+An independent Streamlit practice project for exploring historical stock price records. The dashboard reads the repository's processed CSV file; it does not fetch live market data and is not investment advice.
 
----
-# 💼 S&P 500 Executive Intelligence Hub & Command Center
+[![Open the Streamlit app](https://img.shields.io/badge/Streamlit-Open%20dashboard-red?logo=streamlit)](https://sp500-financial-analytics-f6alqyl7rwqp3hkhuhx6ku.streamlit.app/)
 
-An enterprise-grade financial analytics dashboard built with **Python**, **Streamlit**, and **Plotly** to monitor, analyze, and visualize multi-year S&P 500 stock market data (2014–2017).
+## Dashboard preview
 
-[![Streamlit App](https://img.shields.io/badge/🚀_Live_App-View_Live_Dashboard-red?style=for-the-badge)](https://sp500-financial-analytics-f6alqyl7rwqp3hkhuhx6ku.streamlit.app/)
+Screenshots below show the repository's current dashboard output.
 
----
-## 🎥 Demo & Walkthrough
-> *Watch the live application demo below showcasing real-time filters, executive KPIs, and interactive financial charts.*
+![KPI cards](assets/KPIs.png)
 
-[![Watch the video demo](https://img.shields.io/badge/▶_Click_Here_to_Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](https://github.com/harshmeena9977-ops/sp500-financial-analytics/blob/main/assets/S%26P%20500%20demo.mp4)
----
+![Charts: part 1](assets/Charts1.png)
 
-## 📸 Dashboard Preview & Visual Architecture
+![Charts: part 2](assets/Charts2.png)
 
-### 1. Executive KPI Command Cards
-*A high-level snapshot tracking 12 core financial metrics including valuation, turnover, risk profile, and moving averages.*
-![KPI Command Center](assets/KPIs.png)
+![Charts: part 3](assets/Charts3.png)
 
-### 2. Market Performance & Volatility Analytics
-*Interactive time-series tracking closing price trends, trading volume activity, rolling volatility, and return distributions.*
-![Charts Part 1](assets/Charts1.png)
+[Watch the recorded demo](assets/S%26P%20500%20demo.mp4)
 
-### 3. Cumulative Growth & Price Spread Distribution
-*Advanced financial charts highlighting compounded returns, intraday price spreads, volume correlations, and statistical boxplots.*
-![Charts Part 2](assets/Charts2.png)
+## What it does
 
-### 4. Top Performers, Laggards & AI Intelligence
-*Automated ranking of Top 5 Gainers and Losers alongside real-time AI Executive Market Insights.*
-![Gainers & AI Insights](assets/Charts3.png)
+The app in app.py:
 
----
+- Loads sp500_processed.csv and provides year and ticker filters.
+- Shows 12 KPI cards and interactive Plotly charts for closing prices, volume, rolling volatility, daily returns, cumulative return, high-low spread, volume versus closing price, and closing-price distribution.
+- Ranks symbols by mean daily return across the loaded dataset.
 
-## 🔍 Business Problem & Objective
-Stock markets deal with massive volumes of multi-dimensional time-series data across hundreds of equities. Investors, financial analysts, and corporate executives face challenges in:
-* Identifying true market momentum versus short-term noise.
-* Tracking portfolio-wide and asset-specific volatility (risk management).
-* Spotting top-performing assets and potential downside risks quickly.
-* Analyzing liquidity turnover and price trends in real time.
+The “All Stocks” view computes unweighted averages across symbols for several daily measures and sums volume. It is an aggregate of the available records, not an official S&P 500 index series. The dashboard uses historical records and has no live market-data connection.
 
-**Solution:** The **S&P 500 Executive Intelligence Hub** aggregates nearly half a million financial records into an ultra-clean, high-performance command center. It provides deep-dive analytics, interactive filters, 12 executive KPIs, and 8+ professional financial visualizations.
+## KPI and interpretation notes
 
----
+Some labels in the current app are broader than the formulas behind them:
 
-## 📊 Dataset Overview (`sp500_processed.csv`)
-* **Total Rows / Records:** 497,472+
-* **Unique Equities (Symbols):** 505 S&P 500 companies
-* **Timeframe:** Jan 2014 – Dec 2017
-* **Key Features Available:** Open, High, Low, Close, Volume, Daily Returns, 20-Day & 50-Day Simple Moving Averages (SMA), Volatility, Price Spread, and Predictive Targets.
+- “Total Turnover” is calculated as the sum of close multiplied by volume; it is not independently verified as reported turnover.
+- “Mean Daily Ret” is the arithmetic mean of the daily_return values, not an expected yield.
+- “Max Drop” is the minimum single-period daily_return, not a peak-to-trough maximum drawdown.
+- If the input does not contain cumulative_return, the app calculates a cumulative sum of daily returns. This is not compounded performance.
+- The AI Insights panel currently contains fixed text in app.py; it is not generated by an AI model and should not be treated as a data-backed recommendation.
 
----
+These notes describe the current implementation. The calculations and on-screen labels have not been changed in this documentation update.
 
-## 📈 Key Performance Indicators (KPIs) Built
-The dashboard displays **12 core executive KPIs** arranged in a compact grid:
-1. **Latest Close / S&P Index Price:** Current valuation with prior-day % change.
-2. **Total Turnover:** Cumulative transaction value traded ($).
-3. **20-Day Rolling Risk:** Market-wide/asset volatility standard deviation.
-4. **Period High:** Peak resistance price level.
-5. **Period Low:** Floor support price level.
-6. **Mean Valuation:** Average closing price across the timeframe.
-7. **Total Volume:** Total cumulative shares traded.
-8. **Peak Volume:** Maximum single-session volume spike.
-9. **Mean Daily Return:** Expected daily percentage yield.
-10. **Max Drawdown:** Worst single-day drop recorded (downside stress).
-11. **Latest SMA 20:** Short-term trend indicator.
-12. **Latest SMA 50:** Medium-term trend indicator.
+## Data and provenance
 
----
+The repository contains a source-named CSV file, S&P 500 Stock Prices 2014-2017.csv, and the processed file sp500_processed.csv. The README and code do not establish the original dataset publisher, source URL, license, or verified row and ticker counts. The filename suggests a 2014–2017 period, but exact coverage and counts have not been reconciled here.
 
-## 🛠️ Tech Stack & Libraries
-* **Python 3.10+**
-* **Streamlit** (For interactive web application layout)
-* **Pandas & NumPy** (For data manipulation and calculations)
-* **Plotly** (For high-performance financial charting)
+Do not use the files for investment decisions. Before presenting dataset totals or market conclusions, document the dataset source and license and validate the CSV schema, date range, row count, and unique-symbol count.
 
----
+## Project files
 
-## 🚀 How to Run Locally
+- app.py — Streamlit dashboard.
+- preprocessing.py — prepares derived columns and writes a processed CSV. Review its output path before running so the existing dataset is not overwritten.
+- model.py — separate Random Forest classification experiment. It is not called by the dashboard and does not produce the dashboard's insights.
+- requirements.txt — dependencies listed for the dashboard. The separate model script imports scikit-learn, which is not currently listed here.
 
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/harshmeena9977-ops/sp500-financial-analytics.git](https://github.com/harshmeena9977-ops/sp500-financial-analytics.git)
-   cd sp500-financial-analytics
+## Run the dashboard
+
+Use Python and install the packages listed in requirements.txt:
+
+~~~bash
+git clone https://github.com/harshmeena9977-ops/sp500-financial-analytics.git
+cd sp500-financial-analytics
+python -m venv .venv
+~~~
+
+Activate the virtual environment for your operating system, then run:
+
+~~~bash
+python -m pip install -r requirements.txt
+streamlit run app.py
+~~~
+
+The app expects sp500_processed.csv in the repository root. The dashboard setup above does not install the additional scikit-learn dependency required by the separate model experiment.

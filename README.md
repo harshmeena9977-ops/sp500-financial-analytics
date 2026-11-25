@@ -42,14 +42,16 @@ These notes describe the current implementation. The calculations and on-screen 
 
 ## Data and provenance
 
-The repository contains a source-named CSV file, S&P 500 Stock Prices 2014-2017.csv, and the processed file sp500_processed.csv. The README and code do not establish the original dataset publisher, source URL, license, or verified row and ticker counts. The filename suggests a 2014–2017 period, but exact coverage and counts have not been reconciled here.
+The repository contains a raw CSV file named S&P 500 Stock Prices 2014-2017.csv and the processed file sp500_processed.csv. preprocessing.py reads the raw file and writes sp500_processed.csv; running it replaces that processed file. Keep a backup or write to a separate output path if preserving the current processed dataset.
 
-Do not use the files for investment decisions. Before presenting dataset totals or market conclusions, document the dataset source and license and validate the CSV schema, date range, row count, and unique-symbol count.
+The README and code do not establish the original dataset publisher, source URL, license, or verified row and ticker counts. The filename suggests a 2014–2017 period, but exact coverage and counts have not been reconciled here.
+
+Before presenting dataset totals or market conclusions, document the dataset source and license and validate the CSV schema, date range, row count, and unique-symbol count.
 
 ## Project files
 
 - app.py — Streamlit dashboard.
-- preprocessing.py — prepares derived columns and writes a processed CSV. Review its output path before running so the existing dataset is not overwritten.
+- preprocessing.py — derives returns, moving averages, volatility, and next-day direction labels from the raw CSV; writes sp500_processed.csv.
 - model.py — separate Random Forest classification experiment. It is not called by the dashboard and does not produce the dashboard's insights.
 - requirements.txt — dependencies listed for the dashboard. The separate model script imports scikit-learn, which is not currently listed here.
 
